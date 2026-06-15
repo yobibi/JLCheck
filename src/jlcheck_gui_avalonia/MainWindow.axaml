@@ -1,0 +1,137 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="600" Width="600" Height="600"
+        x:Class="jlcheck_gui_avalonia.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Title="jlcheck_gui_avalonia">
+    <Grid Margin="10,5,10,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="450" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Amatsukazeログを選択してCM解析" Grid.Column="0" VerticalAlignment="Center"/>
+            <Button Content="設定" Grid.Column="1" HorizontalAlignment="Left" Width="100"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center" Click="Button_Click_Settings"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="(1) 入力ログ選択　" Grid.Column="0" Padding="0,2,0,2"
+                    VerticalAlignment="Center" Click="Button_Click_PathAmtLog"/>
+            <Border Name="brdPathAmtLog" Grid.Column="1">
+                <TextBox Name="txtPathAmtLog" TextWrapping="NoWrap" Text="" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnMakeEnv" Content="(2) 作業フォルダ・入力データ作成" Grid.Column="0" Width="230" Padding="0,8,0,8"
+                    HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_ExeMakeEnv"/>
+            <Button Content="　既存作業フォルダ指定　" Grid.Column="1" Width="200"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center" Click="Button_Click_PathDirWork"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="作業フォルダ　" Grid.Column="0" VerticalAlignment="Center"/>
+            <Border Name="brdPathDirWork" Grid.Column="1" VerticalAlignment="Center">
+                <TextBox Name="txtPathDirWork" TextWrapping="NoWrap"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="220" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnExeCm" Content="(3) CM解析実行" Grid.Column="0" Width="200" Padding="0,8,0,8"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_ExeBoot"/>
+            <Button Content="解析起動スクリプト参照・修正" Grid.Column="1" Width="215"
+                    VerticalAlignment="Center" Click="Button_Click_EditBoot"/>
+        </Grid>
+
+        <Grid Grid.Row="5" Margin="0,0,0,0">
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="70" />
+               <ColumnDefinition Width="120" />
+               <ColumnDefinition Width="160" />
+               <ColumnDefinition Width="130" />
+               <ColumnDefinition Width="80" />
+           </Grid.ColumnDefinitions>
+           <Label Content="表示選択" Grid.Column="0" VerticalAlignment="Center"/>
+           <Label Content="CM解析結果" Grid.Column="1" Margin="20,0,0,0"
+                  VerticalAlignment="Center"/>
+           <CheckBox Name="chkDispResult" Grid.Column="1" Width="110"
+                     VerticalAlignment="Center" Margin="0,0,0,0"
+                     IsCheckedChanged="Button_Checked_chkDispResult"/>
+           <Label Content="入力ログ時点の結果" Grid.Column="2" Margin="20,0,0,0"
+                  VerticalAlignment="Center"/>
+           <CheckBox Name="chkDispOriginal" Grid.Column="2" Width="150"
+                     VerticalAlignment="Center" Margin="0,0,0,0"
+                     IsCheckedChanged="Button_Checked_chkDispOriginal"/>
+           <Label Content="実行中のログ" Grid.Column="3" Margin="20,0,0,0"
+                  VerticalAlignment="Center"/>
+           <CheckBox Name="chkDispLog" Content="" Grid.Column="3" Width="120"
+                     VerticalAlignment="Center" Margin="0,0,0,0"
+                     IsCheckedChanged="Button_Checked_chkDispLog"/>
+           <Button Name="btnDispUpdate" Content="内容更新" Grid.Column="4"
+                     VerticalAlignment="Center" Click="Button_Click_btnDispUpdate"/>
+       </Grid>
+
+        <Grid Grid.Row="6" Name="grdDispLabel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Name="lblDispResult" Content="CM解析結果" Grid.Column="0" VerticalAlignment="Center"/>
+            <Label Name="lblDispOriginal" Content="入力ログ時点の結果" Grid.Column="1" VerticalAlignment="Center"/>
+            <Label Name="lblDispLog" Content="実行中のログ" Grid.Column="2" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="7" Name="grdDispText">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Name="sbDispResult" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <TextBox Name="txtDispResult" AcceptsReturn="True"/>
+            </ScrollViewer>
+            <ScrollViewer Name="sbDispOriginal" Grid.Column="1" VerticalScrollBarVisibility="Auto" >
+                <TextBox Name="txtDispOriginal" AcceptsReturn="True"/>
+            </ScrollViewer>
+            <ScrollViewer Name="sbDispLog" Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <TextBox Name="txtDispLog" AcceptsReturn="True"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

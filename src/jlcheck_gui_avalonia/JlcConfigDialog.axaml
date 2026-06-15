@@ -1,0 +1,102 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"  SizeToContent="WidthAndHeight"
+        x:Class="jlcheck_gui_avalonia.JlcConfigDialog"
+        WindowStartupLocation="CenterScreen"
+        Title="ConfigDialog">
+    <Grid Margin="10,5,10,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="120,5,0,5" Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="再読込" Width="75" Margin="10,0,20,0"
+                        ToolTip.Tip="ファイル保存されているデータに戻す"
+                        HorizontalContentAlignment="Center"
+                        Click="Button_Click_Reload"/>
+                <Button Content="初期化" Width="75"
+                        ToolTip.Tip="データが存在しない時の初期状態に戻す"
+                        HorizontalContentAlignment="Center"
+                        Click="Button_Click_Init"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Label Content="ベース作業フォルダ" Grid.Row="1" Grid.Column="0"
+               ToolTip.Tip="ここに入力データ別のフォルダが作成される。%exebase%でこのプログラムの基準となる場所"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Name="txtWorkBase" Grid.Row="1" Grid.Column="1"
+                 TextWrapping="NoWrap" Margin="0,5,0,5" VerticalAlignment="Center"/>
+
+        <Label Content="ログ初期選択フォルダ" Grid.Row="2" Grid.Column="0"
+               ToolTip.Tip="記載したら入力ログ選択時にこのフォルダ場所を最初に表示"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Name="txtLogBase" Grid.Row="2" Grid.Column="1"
+                 TextWrapping="NoWrap" Margin="0,5,0,5" VerticalAlignment="Center"/>
+
+        <Label Content="スクリプト表示エディタ" Grid.Row="3" Grid.Column="0"
+               ToolTip.Tip="解析起動スクリプトを表示する時のエディタ"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Name="txtEditor" Grid.Row="3" Grid.Column="1"
+                 TextWrapping="NoWrap" Margin="0,5,0,5" VerticalAlignment="Center"/>
+
+        <Label Content="結果表示ファイル" Grid.Row="4" Grid.Column="0"
+               ToolTip.Tip="CM解析結果表示欄に表示するファイル名"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Name="txtResult" Grid.Row="4" Grid.Column="1"
+                 TextWrapping="NoWrap" Margin="0,5,0,5" VerticalAlignment="Center"/>
+
+        <Label Content="ログ時点結果ファイル" Grid.Row="5" Grid.Column="0"
+               ToolTip.Tip="ログ時点CM解析結果表示欄に表示するファイル名"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Name="txtOrgResult" Grid.Row="5" Grid.Column="1"
+                 TextWrapping="NoWrap" Margin="0,5,0,5" VerticalAlignment="Center"/>
+
+        <Label Content="結果表示Font選択" Grid.Row="6" Grid.Column="0"
+               ToolTip.Tip="CM解析結果表示で使用するフォント"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ComboBox Name="cmbFontName" Grid.Row="6" Grid.Column="1"
+               Width="270" Margin="0,5,0,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <Label Content="Font Size" Grid.Row="7" Grid.Column="0"
+               ToolTip.Tip="CM解析結果表示で使用するフォントサイズ"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <StackPanel Margin="0,5,0,5" Grid.Row="7" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBox Name="txtFontSize" Grid.Column="1"
+                         Width="40" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+                <CheckBox Name="chkResultWrap" Content="折り返し表示"
+                          HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Margin="20,20,0,5" Grid.Row="8" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="OK" IsDefault="True" Width="90" Margin="5"
+                        HorizontalContentAlignment="Center"
+                        Click="OkButton_Click"/>
+                <Button Content="キャンセル" IsCancel="True" Width="90" Margin="5"
+                        HorizontalContentAlignment="Center"
+                        Click="CancelButton_Click"/>
+                <Button Content="設定保存" Width="90" Margin="30,5,0,5"
+                        HorizontalContentAlignment="Center"
+                        Click="Button_Click_Save"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

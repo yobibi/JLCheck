@@ -1,0 +1,52 @@
+補足について
+
+（このJLCheck作成時点で）Amatsukazeログで不十分な情報を出力するために必要な内容です。
+この改修でAmatsukaze結果とJLCheckのCM解析を一致させることが可能と思います。
+
+下記【chpter_exe.exe】と【JL_out_divfile.txt】の修正が必要です。
+
+
+
+【chpter_exe.exe】 （ファイル場所：Amatsukaze\exe_files\）
+
+［問題点]
+Amatsukazeの無音シーンチェンジログはchpter_exe.exeの標準出力ですが、
+この部分にインターレース補正を入れてなかったため実際と少しだけ誤差が出ます。
+
+[修正内容]
+インターレース補正後のデータを標準出力にも使用
+Nekopanda氏のソース(https://github.com/nekopanda/chapter_exe)から
+この変更のみ加えたものを添付します。
+
+具体的な変更箇所は、chapter_exe.cppの下記
+（変更前）
+printf("\t SCPos: %d %s\n", d_max_pos[k], mark);
+（変更後）
+printf("\t SCPos: %d %d %s\n", d_maxrev_pos[k], d_maxpre_pos[k], mark);
+
+[注意点]
+位置情報が１点だった所が２点になり出力フォーマットがその分だけ変わります。
+
+[参考]
+chpter_exe.exeは標準出力とファイル出力でフォーマットが違いますが、
+ファイル出力フォーマットでログに記載されていてもJLCheckは読み込めます。
+
+
+【JL_out_divfile.txt】（ファイル場所：Amatsukaze\JL\common\）
+
+[問題点]
+分割位置リストがログになかったため、Amatsukazeログ時点の分割位置は不明。
+（JLCheck実行後に作成される分割位置情報は現状でも問題ありません）
+
+[修正内容]
+分割位置地点をJL記述で標準出力（下記）。
+join_logo_scp ver5.1.1で差し替えてあります。
+JL_out_divfile.txtは分割を行う時のみCallされます。
+
+（追加）
+#--- 標準出力に結果出力 ---
+MemSet OUTPUT {                 # 出力時自動的に実行
+  EchoItem "join_logo_scp [分割位置 - 開始]"
+  MemCall divfile_echo_odiv
+  EchoItem "join_logo_scp [分割位置 - 終了]"
+};

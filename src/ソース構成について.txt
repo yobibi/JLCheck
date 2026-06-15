@@ -1,0 +1,42 @@
+ソースは試行錯誤していたため２種類存在
+
+[WPF] (jlcheck_gui_w)
+- Windows専用
+- C# (WPF + .NET Framework4.8)
+- Visual Studio Community 2022
+
+[AvaloniaUI] (jlcheck_gui_avalonia)
+- Windows/Linux 両対応
+- C# (.NET10.0) （拡張機能から追加したテンプレート使用）
+- Visual Studio Community 2026
+
+共通で
+- Windows11で作成（Avalonia UIは出力時に対象機種指定）
+
+
+【背景】
+将来性を考えたら WebUI + Python が良いと思いましたが、
+
+・自分が作れる方法（WebUIはよくわからない）
+・標準WindowsPCに追加インストールなしで使いたい
+  （現在Windows用Amatsukaze使用にPython必須ではないと思うので）
+・当面は安心して継続使用できる環境であればよい
+
+という個人的な理由で
+  デスクトップUI + PowerShellスクリプト（バージョン5以降[windows標準対応]）
+の組み合わせで作成
+自分が欲しいと思っていた機能を作成しました。
+
+デスクトップUIについては、下記理由で選択
+・多くのソフト同様扱いで放置しても大丈夫そうな(WPF + .NET Framework4.8)
+・Linux考慮で更新の続いている.NET最新状態でWPFからの移行含め試行(Avalonia UI)
+
+Avalonia UIがWPFからの移行に最適ということで今回初めて使用。
+いろいろ修正必要でしたが、
+・フレームはそれぞれの環境を使用（フレームに追加した定型のコード含む）
+・C#の自作コード部分はそのままコピー（#ifで違いを両方記述）
+・XAML部分は下の文字列を単純置換
+    s/ToolTip=/ToolTip.Tip=/
+    s/Checked=/IsCheckedChanged=/
+でWPF版と同期できる状態になっています。
+（Avalonia UIだけでWindows/Linux両対応なので必須ではありませんが）
